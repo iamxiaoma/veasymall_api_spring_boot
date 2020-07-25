@@ -26,11 +26,9 @@ public class RedisController {
 	private RedisOperator redis;
 
 	@RequestMapping("/test")
-	public Result test() {
+	public Result test(User user) {
 
 		strRedis.opsForValue().set("veasymall-cache", "hello veasymall", 30, TimeUnit.SECONDS);
-
-		User user = new User();
 
 		user.setName("marco");
 		user.setPassword("124567");
