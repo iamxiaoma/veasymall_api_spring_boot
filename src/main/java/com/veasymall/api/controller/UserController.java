@@ -27,12 +27,10 @@ public class UserController {
 
 		user.setName("marco");
 		user.setPassword("123456");
-		user.setDesc("sdfasf");
 		user.setBirthday(new Date());
 		user.setAccount("admin");
-		user.setAge(22);
 
-		return JSONResult.ok(user);
+		return JSONResult.ok();
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/get_qiniu_resource")

@@ -1,75 +1,196 @@
 package com.veasymall.api.pojo;
 
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import javax.persistence.*;
 
 public class User {
+    @Id
+    private Integer id;
 
-	private String name;
+    /**
+     * 账号
+     */
+    private String account;
 
-	private Integer age;
+    /**
+     * 密码
+     */
+    private String password;
 
-	private String account;
+    /**
+     * 姓名
+     */
+    private String name;
 
-	@JsonIgnore
-	private String password;
+    /**
+     * 出生日期
+     */
+    private Date birthday;
 
-	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss a", locale = "zh", timezone = "GMT+8")
-	private Date birthday;
+    /**
+     * 手机号码
+     */
+    private String mobile;
 
-	@JsonInclude(Include.NON_NULL)
-	private String desc;
+    /**
+     * 国家代码
+     */
+    @Column(name = "country_code")
+    private String countryCode;
 
-	public String getName() {
-		return name;
-	}
+    @Column(name = "create_time")
+    private Date createTime;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    @Column(name = "update_time")
+    private Date updateTime;
 
-	public Integer getAge() {
-		return age;
-	}
+    /**
+     * @return id
+     */
+    public Integer getId() {
+        return id;
+    }
 
-	public void setAge(Integer age) {
-		this.age = age;
-	}
+    /**
+     * @param id
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getAccount() {
-		return account;
-	}
+    /**
+     * 获取账号
+     *
+     * @return account - 账号
+     */
+    public String getAccount() {
+        return account;
+    }
 
-	public void setAccount(String account) {
-		this.account = account;
-	}
+    /**
+     * 设置账号
+     *
+     * @param account 账号
+     */
+    public void setAccount(String account) {
+        this.account = account;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    /**
+     * 获取密码
+     *
+     * @return password - 密码
+     */
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    /**
+     * 设置密码
+     *
+     * @param password 密码
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public Date getBirthday() {
-		return birthday;
-	}
+    /**
+     * 获取姓名
+     *
+     * @return name - 姓名
+     */
+    public String getName() {
+        return name;
+    }
 
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
+    /**
+     * 设置姓名
+     *
+     * @param name 姓名
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getDesc() {
-		return desc;
-	}
+    /**
+     * 获取出生日期
+     *
+     * @return birthday - 出生日期
+     */
+    public Date getBirthday() {
+        return birthday;
+    }
 
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
+    /**
+     * 设置出生日期
+     *
+     * @param birthday 出生日期
+     */
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 
+    /**
+     * 获取手机号码
+     *
+     * @return mobile - 手机号码
+     */
+    public String getMobile() {
+        return mobile;
+    }
+
+    /**
+     * 设置手机号码
+     *
+     * @param mobile 手机号码
+     */
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    /**
+     * 获取国家代码
+     *
+     * @return country_code - 国家代码
+     */
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    /**
+     * 设置国家代码
+     *
+     * @param countryCode 国家代码
+     */
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
+
+    /**
+     * @return create_time
+     */
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    /**
+     * @param createTime
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    /**
+     * @return update_time
+     */
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    /**
+     * @param updateTime
+     */
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
 }
