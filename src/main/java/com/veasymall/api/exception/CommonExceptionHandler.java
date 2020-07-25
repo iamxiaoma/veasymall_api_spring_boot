@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.veasymall.api.pojo.JSONResult;
+import com.veasymall.api.pojo.Result;
 
 @RestControllerAdvice
 public class CommonExceptionHandler {
@@ -18,7 +18,7 @@ public class CommonExceptionHandler {
 		e.printStackTrace();
 
 		if (isAjax(request)) {
-			return JSONResult.errorException(e.getMessage());
+			return Result.errorException(e.getMessage());
 		} else {
 			// 非 ajax 请求方式，则返回数据到页面进行错误信息提示
 			return response;

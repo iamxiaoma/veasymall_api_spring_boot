@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.veasymall.api.pojo.JSONResult;
+import com.veasymall.api.pojo.Result;
 import com.veasymall.api.pojo.User;
 import com.veasymall.api.resource.QiniuResource;
 import com.veasymall.api.service.UserService;
@@ -31,7 +31,7 @@ public class UserController {
 
 	@RequestMapping(method = RequestMethod.GET, path = "/list")
 	@ResponseBody
-	public JSONResult getUserList(Integer page) {
+	public Result getUserList(Integer page) {
 
 		if (page == null) {
 			page = 1;
@@ -43,12 +43,12 @@ public class UserController {
 
 		List<User> userList = userService.queryUserListPaged(user, page, pageSize);
 
-		return JSONResult.ok(userList);
+		return Result.ok(userList);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/get_user")
 	@ResponseBody
-	public JSONResult getUser() {
+	public Result getUser() {
 
 		User user = new User();
 
@@ -57,23 +57,23 @@ public class UserController {
 		user.setBirthday(new Date());
 		user.setAccount("admin");
 
-		return JSONResult.ok(user);
+		return Result.ok(user);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/get_qiniu_resource")
 	@ResponseBody
-	public JSONResult getQiniuResource() {
+	public Result getQiniuResource() {
 
 		// 进行属性拷贝
 		QiniuResource bean = new QiniuResource();
 		BeanUtils.copyProperties(qiniuResource, bean);
 
-		return JSONResult.ok(bean);
+		return Result.ok(bean);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/saveUser")
 	@ResponseBody
-	public JSONResult saveUser() throws Exception {
+	public Result saveUser() throws Exception {
 
 		// log.info("保存用户，当前时间：{}，操作人：{}", new Date(), "Marco");
 
@@ -86,7 +86,7 @@ public class UserController {
 
 		userService.saveUser(user);
 
-		return JSONResult.ok("保存成功");
+		return Result.ok("保存成功");
 
 	}
 

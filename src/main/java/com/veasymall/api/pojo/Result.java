@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * 
  *
  */
-public class JSONResult {
+public class Result {
 
 	// 定义 jackson 对象
 	private static final ObjectMapper MAPPER = new ObjectMapper();
@@ -23,44 +23,44 @@ public class JSONResult {
 	// 响应中的数据
 	private Object data;
 
-	public JSONResult(Integer errcode, String errmsg, Object data) {
+	public Result(Integer errcode, String errmsg, Object data) {
 		this.errcode = errcode;
 		this.errmsg = errmsg;
 		this.data = data;
 	}
 
-	public JSONResult(Object data) {
+	public Result(Object data) {
 		this.errcode = 200;
 		this.errmsg = "ok";
 		this.data = data;
 	}
 
-	public static JSONResult build(Integer status, String msg, Object data) {
-		return new JSONResult(status, msg, data);
+	public static Result build(Integer status, String msg, Object data) {
+		return new Result(status, msg, data);
 	}
 
-	public static JSONResult ok(Object data) {
-		return new JSONResult(data);
+	public static Result ok(Object data) {
+		return new Result(data);
 	}
 
-	public static JSONResult ok() {
-		return new JSONResult(null);
+	public static Result ok() {
+		return new Result(null);
 	}
 
-	public static JSONResult errorMsg(String msg) {
-		return new JSONResult(500, msg, null);
+	public static Result errorMsg(String msg) {
+		return new Result(500, msg, null);
 	}
 
-	public static JSONResult errorMap(Object data) {
-		return new JSONResult(501, "error", data);
+	public static Result errorMap(Object data) {
+		return new Result(501, "error", data);
 	}
 
-	public static JSONResult errorTokenMsg(String msg) {
-		return new JSONResult(502, msg, null);
+	public static Result errorTokenMsg(String msg) {
+		return new Result(502, msg, null);
 	}
 
-	public static JSONResult errorException(String msg) {
-		return new JSONResult(555, msg, null);
+	public static Result errorException(String msg) {
+		return new Result(555, msg, null);
 	}
 
 	public Integer getErrcode() {
