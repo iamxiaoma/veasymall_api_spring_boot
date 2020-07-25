@@ -14,7 +14,7 @@ public class TestTask {
 	// 定义每3秒执行任务
 	@Scheduled(fixedRate = 3000)
 	public void reportCurrentTime() {
-		System.out.println("现在时间：" + dateFormat.format(new Date()));
+		// System.out.println("现在时间：" + dateFormat.format(new Date()));
 	}
 
 	/**
@@ -22,7 +22,7 @@ public class TestTask {
 	 */
 	@Scheduled(cron = "4-40 * * * * ? ")
 	public void cronSchedule() {
-		System.out.println("Cron 现在时间：" + dateFormat.format(new Date()));
+		// System.out.println("Cron 现在时间：" + dateFormat.format(new Date()));
 	}
 
 }

@@ -2,6 +2,7 @@ package com.veasymall.api;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 // 注意要引用 tk.mybatis 的 MapperScan
@@ -13,6 +14,9 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 // 开启定时任务
 @EnableScheduling
+
+// 开启异步调用方法
+@EnableAsync
 public class ApiApplication {
 
 	public static void main(String[] args) {
