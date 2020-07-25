@@ -1,7 +1,10 @@
 package com.veasymall.api.controller;
 
 import java.util.Date;
+import java.util.List;
 
+import org.mybatis.logging.Logger;
+import org.mybatis.logging.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,12 +15,36 @@ import org.springframework.web.bind.annotation.RestController;
 import com.veasymall.api.pojo.JSONResult;
 import com.veasymall.api.pojo.User;
 import com.veasymall.api.resource.QiniuResource;
+import com.veasymall.api.service.UserService;
 
 @RestController
+@RequestMapping("user")
 public class UserController {
+
+	// final static Logger log = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
 	private QiniuResource qiniuResource;
+
+	@Autowired
+	private UserService userService;
+
+	@RequestMapping(method = RequestMethod.GET, path = "/list")
+	@ResponseBody
+	public JSONResult getUserList(Integer page) {
+
+		if (page == null) {
+			page = 1;
+		}
+
+		int pageSize = 2;
+
+		User user = new User();
+
+		List<User> userList = userService.queryUserListPaged(user, page, pageSize);
+
+		return JSONResult.ok(userList);
+	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/get_user")
 	@ResponseBody
@@ -30,7 +57,7 @@ public class UserController {
 		user.setBirthday(new Date());
 		user.setAccount("admin");
 
-		return JSONResult.ok();
+		return JSONResult.ok(user);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/get_qiniu_resource")
@@ -42,6 +69,25 @@ public class UserController {
 		BeanUtils.copyProperties(qiniuResource, bean);
 
 		return JSONResult.ok(bean);
+	}
+
+	@RequestMapping(method = RequestMethod.GET, path = "/saveUser")
+	@ResponseBody
+	public JSONResult saveUser() throws Exception {
+
+		// log.info("保存用户，当前时间：{}，操作人：{}", new Date(), "Marco");
+
+		// String userId = sid.nextShort();
+
+		User user = new User();
+		user.setName("marco");
+		user.setPassword("123456");
+		user.setCreateTime(new Date());
+
+		userService.saveUser(user);
+
+		return JSONResult.ok("保存成功");
+
 	}
 
 }

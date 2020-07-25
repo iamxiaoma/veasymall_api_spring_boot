@@ -1,11 +1,14 @@
 package com.veasymall.api;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
+// 注意要引用 tk.mybatis 的 MapperScan
+import tk.mybatis.spring.annotation.MapperScan;
+
 @SpringBootApplication
-@MapperScan("com.veasymall.api.mapper")
+// 扫描 mybatis mapper 包路径
+@MapperScan(basePackages = "com.veasymall.api.mapper")
 public class ApiApplication {
 
 	public static void main(String[] args) {
