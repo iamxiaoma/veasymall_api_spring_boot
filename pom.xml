@@ -29,7 +29,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
@@ -89,12 +89,6 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
-
-		<!-- https://mvnrepository.com/artifact/tk.mybatis/mapper -->
-		<!-- <dependency> <groupId>tk.mybatis</groupId> <artifactId>mapper</artifactId> 
-			<version>4.1.5</version> </dependency> -->
-
-
 		<!--mybatis -->
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
@@ -144,12 +138,21 @@
 			<artifactId>druid-spring-boot-starter</artifactId>
 			<version>1.1.22</version>
 		</dependency>
-		
-		
+
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.apache.rocketmq/rocketmq-spring-boot-starter -->
+		<dependency>
+			<groupId>org.apache.rocketmq</groupId>
+			<artifactId>rocketmq-spring-boot-starter</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+
 
 
 

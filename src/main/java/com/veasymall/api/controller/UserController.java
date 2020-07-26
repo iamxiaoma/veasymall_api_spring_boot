@@ -3,8 +3,8 @@ package com.veasymall.api.controller;
 import java.util.Date;
 import java.util.List;
 
-import org.mybatis.logging.Logger;
-import org.mybatis.logging.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +21,7 @@ import com.veasymall.api.service.UserService;
 @RequestMapping("user")
 public class UserController {
 
-	// final static Logger log = LoggerFactory.getLogger(UserController.class);
+	final static Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
 	private QiniuResource qiniuResource;
