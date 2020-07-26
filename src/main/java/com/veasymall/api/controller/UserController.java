@@ -17,7 +17,12 @@ import com.veasymall.api.pojo.User;
 import com.veasymall.api.resource.QiniuResource;
 import com.veasymall.api.service.UserService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
 @RestController
+@Api(value = "用户相关接口")
 @RequestMapping("user")
 public class UserController {
 
@@ -29,9 +34,10 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@ApiOperation(value = "分页获取用户列表")
 	@RequestMapping(method = RequestMethod.GET, path = "/list")
 	@ResponseBody
-	public Result getUserList(Integer page) {
+	public Result getUserList(@ApiParam(value = "页码", required = false) Integer page) {
 
 		if (page == null) {
 			page = 1;
