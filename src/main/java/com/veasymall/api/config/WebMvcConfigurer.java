@@ -20,6 +20,7 @@ import com.veasymall.api.interceptor.OneInterceptor;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.AuthorizationScope;
@@ -28,11 +29,10 @@ import springfox.documentation.service.SecurityScheme;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 //启用 swagger-ui 访问入口为： http://localhost:8080/context-path/swagger-ui/index.html
-@EnableSwagger2
+@EnableOpenApi
 public class WebMvcConfigurer extends WebMvcConfigurationSupport {
 
 	/**
@@ -61,16 +61,23 @@ public class WebMvcConfigurer extends WebMvcConfigurationSupport {
 
 	@Override
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
-		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
-		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+
+		// springfox-swagger-ui 3.0. 版本添加一下代码解决拦截器导致的404，查看源码
+		registry.addResourceHandler("/swagger-ui/**")
+				.addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/")
+				.resourceChain(false);
+
+		// springfox-swagger-ui 2.9.2 版本添加一下代码解决拦截器导致的404
+//		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+//		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+//		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
 		super.addResourceHandlers(registry);
 	}
 
 	@Bean
 	public Docket createRestApi() {
 
-		return new Docket(DocumentationType.SWAGGER_2)
+		return new Docket(DocumentationType.OAS_30)
 				// 定义是否开启 swagger，false 为关闭，可以通过配置变量控制
 				.enable(enable)
 				// 将 api 的元信息设置为包含在 json ResourceListing 响应中。
@@ -124,7 +131,7 @@ public class WebMvcConfigurer extends WebMvcConfigurationSupport {
 
 		registry.addInterceptor(new BaseInterceptor()).addPathPatterns("/**").excludePathPatterns("/csrf")
 				.excludePathPatterns("/swagger-resources/**").excludePathPatterns("/webjars/**")
-				.excludePathPatterns("/v2/**").excludePathPatterns("/doc.html");
+				.excludePathPatterns("/v2/**").excludePathPatterns("/v3/**").excludePathPatterns("/doc.html");
 
 		/**
 		 * 拦截器按照顺序执行

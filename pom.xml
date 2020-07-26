@@ -162,22 +162,25 @@
 		</dependency>
 
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>2.9.2</version>
-		</dependency>
+		</dependency> -->
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.9.2</version>
-		</dependency>
+		</dependency> -->
 
 		<!-- 3.0.0 以下版本的入口地址为： swagger-ui.html 3.0.0 版本对应的入口地址为： swagger-ui/index.html -->
 		<!-- 3.0.0 版本和拦截器冲突，暂时不用 -->
-		<!-- <dependency> <groupId>io.springfox</groupId> <artifactId>springfox-boot-starter</artifactId> 
-			<version>3.0.0</version> </dependency> -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
 
 
 
