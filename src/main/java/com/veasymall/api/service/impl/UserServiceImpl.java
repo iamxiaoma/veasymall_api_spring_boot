@@ -44,8 +44,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS)
 	public User queryUserById(Integer userId) {
-		// TODO Auto-generated method stub
-		return null;
+		return userMapper.selectByPrimaryKey(userId);
 	}
 
 	@Override
