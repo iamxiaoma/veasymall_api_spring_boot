@@ -12,4 +12,4 @@ one mall api service base on spring boot and mybatis.
 ### AOP
 ### 单元测试
 ### RocketMQ
-### SpringFox-Swagger-UI 2.9.2
+### SpringFox-Swagger-UI 3.0.0
