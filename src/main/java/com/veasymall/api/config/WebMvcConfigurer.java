@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringBootVersion;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -24,6 +25,7 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.AuthorizationScope;
+import springfox.documentation.service.Contact;
 import springfox.documentation.service.SecurityReference;
 import springfox.documentation.service.SecurityScheme;
 import springfox.documentation.spi.DocumentationType;
@@ -75,15 +77,75 @@ public class WebMvcConfigurer extends WebMvcConfigurationSupport {
 	}
 
 	@Bean
-	public Docket createRestApi() {
+	public Docket adminApi() {
 
-		return new Docket(DocumentationType.OAS_30)
+		return new Docket(DocumentationType.OAS_30).groupName("总后台接口")
 				// 定义是否开启 swagger，false 为关闭，可以通过配置变量控制
 				.enable(enable)
 				// 将 api 的元信息设置为包含在 json ResourceListing 响应中。
 				.apiInfo(apiInfo())
 				// 选择哪些接口作为 swagger 的 doc 发布
-				.select().apis(RequestHandlerSelectors.basePackage("com.veasymall.api.controller"))
+				.select().apis(RequestHandlerSelectors.basePackage("com.veasymall.api.controller.admin"))
+				.paths(PathSelectors.any()).build()
+				// 支持的通讯协议集合
+				.protocols(newHashSet("https", "http"))
+				// 授权信息设置，必要的 header token 等认证信息
+				.securitySchemes(securitySchemes())
+				// 授权信息全局应用
+				.securityContexts(securityContexts());
+
+	}
+
+	@Bean
+	public Docket merchantApi() {
+
+		return new Docket(DocumentationType.OAS_30).groupName("商户端接口")
+				// 定义是否开启 swagger，false 为关闭，可以通过配置变量控制
+				.enable(enable)
+				// 将 api 的元信息设置为包含在 json ResourceListing 响应中。
+				.apiInfo(apiInfo())
+				// 选择哪些接口作为 swagger 的 doc 发布
+				.select().apis(RequestHandlerSelectors.basePackage("com.veasymall.api.controller.merchant"))
+				.paths(PathSelectors.any()).build()
+				// 支持的通讯协议集合
+				.protocols(newHashSet("https", "http"))
+				// 授权信息设置，必要的 header token 等认证信息
+				.securitySchemes(securitySchemes())
+				// 授权信息全局应用
+				.securityContexts(securityContexts());
+
+	}
+
+	@Bean
+	public Docket appApi() {
+
+		return new Docket(DocumentationType.OAS_30).groupName("移动端接口")
+				// 定义是否开启 swagger，false 为关闭，可以通过配置变量控制
+				.enable(enable)
+				// 将 api 的元信息设置为包含在 json ResourceListing 响应中。
+				.apiInfo(apiInfo())
+				// 选择哪些接口作为 swagger 的 doc 发布
+				.select().apis(RequestHandlerSelectors.basePackage("com.veasymall.api.controller.app"))
+				.paths(PathSelectors.any()).build()
+				// 支持的通讯协议集合
+				.protocols(newHashSet("https", "http"))
+				// 授权信息设置，必要的 header token 等认证信息
+				.securitySchemes(securitySchemes())
+				// 授权信息全局应用
+				.securityContexts(securityContexts());
+
+	}
+
+	@Bean
+	public Docket pcApi() {
+
+		return new Docket(DocumentationType.OAS_30).groupName("PC端接口")
+				// 定义是否开启 swagger，false 为关闭，可以通过配置变量控制
+				.enable(enable)
+				// 将 api 的元信息设置为包含在 json ResourceListing 响应中。
+				.apiInfo(apiInfo())
+				// 选择哪些接口作为 swagger 的 doc 发布
+				.select().apis(RequestHandlerSelectors.basePackage("com.veasymall.api.controller.pc"))
 				.paths(PathSelectors.any()).build()
 				// 支持的通讯协议集合
 				.protocols(newHashSet("https", "http"))
@@ -95,8 +157,10 @@ public class WebMvcConfigurer extends WebMvcConfigurationSupport {
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("VeasyMall Api Doc")
-				.description("This is a restful api document of VeasyMall").version("1.0").build();
+		return new ApiInfoBuilder().title(applicationName + " Api Doc").description(applicationDescription)
+				.contact(new Contact("iamxiaoma", null, "395487290@qq.com")).version("Application Version："
+						+ applicationVersion + "，Spring Boot Version：" + SpringBootVersion.getVersion())
+				.build();
 	}
 
 	/**
